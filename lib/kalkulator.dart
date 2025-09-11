@@ -66,54 +66,72 @@ class _CalculatorState extends State<Calculator> {
           // Bagian bawah / tombol untuk input
           Expanded(
             flex: 2,
-            child: Column(
+            child: Row(
               children: [
                 Expanded(
-                  child: Row(
+                  flex: 3,
+                  child: Column(
                     children: [
-                      buildButton("AC"),
-                      buildButton("÷"),
-                      buildButton("×"),
-                      buildButton("%"),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            buildButton("AC"),
+                            buildButton("÷"),
+                            buildButton("×"),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            buildButton("7"),
+                            buildButton("8"),
+                            buildButton("9"),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            buildButton("4"),
+                            buildButton("5"),
+                            buildButton("6"),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            buildButton("1"),
+                            buildButton("2"),
+                            buildButton("3"),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            buildButton("0", flex: 2),
+                            buildButton("."),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
+
+                // Kolom bagian kanan
                 Expanded(
-                  child: Row(
+                  flex: 1,
+                  child: Column(
                     children: [
-                      buildButton("7"),
-                      buildButton("8"),
-                      buildButton("9"),
                       buildButton("+"),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Row(
-                    children: [
-                      buildButton("4"),
-                      buildButton("5"),
-                      buildButton("6"),
                       buildButton("-"),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Row(
-                    children: [
-                      buildButton("1"),
-                      buildButton("2"),
-                      buildButton("3"),
                       buildButton("⌫"),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Row(
-                    children: [
-                      buildButton("0", flex: 2),
-                      buildButton("."),
-                      buildButton("="),
+                      Expanded(
+                        flex: 2,
+                        child: buildButton("="),
+                      ),
                     ],
                   ),
                 ),
@@ -198,14 +216,12 @@ class _CalculatorState extends State<Calculator> {
     userInput += text;
   }
 
-  /// Fungsi hitung sederhana tanpa package
+  /// Fungsi operasi hitung untuk kalkulator
   String calculate() {
     try {
       String input = userInput;
-      // ganti simbol agar lebih mudah
       input = input.replaceAll("×", "*").replaceAll("÷", "/");
 
-      // parsing manual
       List<String> tokens = tokenize(input);
       double eval = evaluate(tokens);
       return eval.toString();
@@ -239,7 +255,7 @@ class _CalculatorState extends State<Calculator> {
 
   /// Evaluasi dengan prioritas operator
   double evaluate(List<String> tokens) {
-    // tahap 1: × dan ÷
+    // tahap 1: untuk × dan ÷
     for (int i = 0; i < tokens.length; i++) {
       if (tokens[i] == "*" || tokens[i] == "/") {
         double left = double.parse(tokens[i - 1]);
@@ -251,7 +267,7 @@ class _CalculatorState extends State<Calculator> {
       }
     }
 
-    // tahap 2: + dan -
+    // tahap 2: untuk + dan -
     double result = double.parse(tokens[0]);
     for (int i = 1; i < tokens.length; i += 2) {
       String op = tokens[i];
