@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
-import 'styles.dart';
+import 'package:myfinance/gg.dart';
+import 'package:myfinance/homepage.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'kalkulator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,14 +11,18 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      color: AppColors.backGround,
-      title: 'MyFinance',
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      title: 'Flutter Demo',
+      theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const PageHomepage(),
+        '/kalkulator': (context) => const Calculator(),
+        '/ganjilgenap': (context) => const OddEvenPage(),
+      },
     );
   }
 }
