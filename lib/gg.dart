@@ -162,7 +162,6 @@ class _OddEvenPageState extends State<OddEvenPage>
           Padding(
             padding: const EdgeInsets.all(20),
             child: Container(
-              constraints: BoxConstraints(maxHeight: 100),
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 17, 17, 29),
