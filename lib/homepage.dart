@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myfinance/styles.dart';
+import 'package:typewritertext/typewritertext.dart';
 
 class PageHomepage extends StatelessWidget {
   const PageHomepage({super.key});
@@ -74,6 +75,10 @@ class PageHomepage extends StatelessWidget {
                     crossAxisAlignment:
                         CrossAxisAlignment.center, // ubah ke start
                     children: [
+                      // TypeWriter.text(
+                      //   'lorem ipsum dolot sit amet ...',
+                      //   duration: const Duration(milliseconds: 50),
+                      // ),
                       Text(
                         "Halo!",
                         style: TextStyle(
@@ -81,8 +86,9 @@ class PageHomepage extends StatelessWidget {
                           fontSize: 40,
                           fontWeight: FontWeight.w600,
                         ),
+                        // duration: const Duration(milliseconds: 90),
                       ),
-                      Text(
+                      TypeWriter.text(
                         "Klik tombol di bawah ini untuk melihat halaman pembuat.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -90,6 +96,8 @@ class PageHomepage extends StatelessWidget {
                           fontSize: 18,
                           fontWeight: FontWeight.w100,
                         ),
+                        duration: const Duration(milliseconds: 90),
+                        repeat: true,
                       ),
                       SizedBox(height: 15),
                       Container(
