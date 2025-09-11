@@ -54,56 +54,50 @@ class _CalculatorState extends State<Calculator> {
             flex: 2,
             child: Column(
               children: [
-                // Baris 1
                 Expanded(
                   child: Row(
                     children: [
                       buildButton("AC"),
-                      buildButton("("),
-                      buildButton(")"),
+                      buildButton("÷"),
+                      buildButton("×"),
                       buildButton("%"),
                     ],
                   ),
                 ),
-                // Baris 2
                 Expanded(
                   child: Row(
                     children: [
                       buildButton("7"),
                       buildButton("8"),
                       buildButton("9"),
-                      buildButton("×"),
+                      buildButton("+"),
                     ],
                   ),
                 ),
-                // Baris 3
                 Expanded(
                   child: Row(
                     children: [
                       buildButton("4"),
                       buildButton("5"),
                       buildButton("6"),
-                      buildButton("+"),
+                      buildButton("-"),
                     ],
                   ),
                 ),
-                // Baris 4
                 Expanded(
                   child: Row(
                     children: [
                       buildButton("1"),
                       buildButton("2"),
                       buildButton("3"),
-                      buildButton("-"),
+                      buildButton("⌫"),
                     ],
                   ),
                 ),
-                // Baris 5
                 Expanded(
                   child: Row(
                     children: [
-                      buildButton("⌫"),
-                      buildButton("0"),
+                      buildButton("0", flex: 2),
                       buildButton("."),
                       buildButton("="),
                     ],
@@ -126,7 +120,7 @@ class _CalculatorState extends State<Calculator> {
         child: InkWell(
           onTap: () {
             setState(() {
-              userInput += text;
+              handleButtons(text);
             });
           },
           child: Container(
@@ -152,8 +146,8 @@ class _CalculatorState extends State<Calculator> {
 
   /// Warna background tombol
   Color getBgColor(String text) {
-    if (text == '=') return const Color.fromARGB(255, 255, 255, 255);
-    if (['1', '2', '3', '4', '5', '6', '7', '8', '9'].contains(text)) {
+    if (text == '=') return Colors.white;
+    if (['0','1','2','3','4','5','6','7','8','9'].contains(text)) {
       return const Color.fromARGB(255, 63, 63, 63);
     }
     return Colors.grey[850]!;
@@ -161,7 +155,94 @@ class _CalculatorState extends State<Calculator> {
 
   /// Warna teks tombol
   Color getColor(String text) {
-    if (text == '=') return const Color.fromARGB(255, 0, 0, 0);
+    if (text == '=') return Colors.black;
     return Colors.white;
+  }
+
+  /// Logika tombol
+  void handleButtons(String text) {
+    if (text == "AC") {
+      userInput = "";
+      result = "0";
+      return;
+    }
+    if (text == "⌫") {
+      if (userInput.isNotEmpty) {
+        userInput = userInput.substring(0, userInput.length - 1);
+      }
+      return;
+    }
+    if (text == "=") {
+      result = calculate();
+      return;
+    }
+
+    userInput += text;
+  }
+
+  /// Fungsi hitung sederhana tanpa package
+  String calculate() {
+    try {
+      String input = userInput;
+      // ganti simbol agar lebih mudah
+      input = input.replaceAll("×", "*").replaceAll("÷", "/");
+
+      // parsing manual
+      List<String> tokens = tokenize(input);
+      double eval = evaluate(tokens);
+      return eval.toString();
+    } catch (e) {
+      return "Error";
+    }
+  }
+
+  /// Pisahkan angka dan operator
+  List<String> tokenize(String input) {
+    List<String> tokens = [];
+    String number = "";
+
+    for (int i = 0; i < input.length; i++) {
+      String ch = input[i];
+
+      if ("0123456789.".contains(ch)) {
+        number += ch;
+      } else {
+        if (number.isNotEmpty) {
+          tokens.add(number);
+          number = "";
+        }
+        tokens.add(ch);
+      }
+    }
+
+    if (number.isNotEmpty) tokens.add(number);
+    return tokens;
+  }
+
+  /// Evaluasi dengan prioritas operator
+  double evaluate(List<String> tokens) {
+    // tahap 1: × dan ÷
+    for (int i = 0; i < tokens.length; i++) {
+      if (tokens[i] == "*" || tokens[i] == "/") {
+        double left = double.parse(tokens[i - 1]);
+        double right = double.parse(tokens[i + 1]);
+        double res = tokens[i] == "*" ? left * right : left / right;
+
+        tokens.replaceRange(i - 1, i + 2, [res.toString()]);
+        i -= 1;
+      }
+    }
+
+    // tahap 2: + dan -
+    double result = double.parse(tokens[0]);
+    for (int i = 1; i < tokens.length; i += 2) {
+      String op = tokens[i];
+      double num = double.parse(tokens[i + 1]);
+
+      if (op == "+") result += num;
+      if (op == "-") result -= num;
+    }
+
+    return result;
   }
 }
