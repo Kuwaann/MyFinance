@@ -12,6 +12,7 @@ class CustomTextfield extends StatelessWidget {
     this.hasSuffixIcon = false,
     this.onPressed,
     this.isObscure = false,
+    this.prefixIcon,
   });
 
   final TextEditingController controller;
@@ -22,21 +23,30 @@ class CustomTextfield extends StatelessWidget {
   final bool hasSuffixIcon;
   final VoidCallback? onPressed;
   final bool isObscure;
-  
+  final IconData? prefixIcon;
+
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      style: TextStyle(color: AppColors.outlineElement),
+      style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+      cursorColor: Color.fromARGB(255, 255, 255, 255),
       keyboardType: textInputType,
       textInputAction: textInputAction,
       obscureText: isObscure,
       decoration: InputDecoration(
-        suffixIcon: hasSuffixIcon ? IconButton(
-          onPressed: onPressed, 
-          icon: Icon(
-            isObscure ? Icons.visibility : Icons.visibility_off)) : null,
-          enabledBorder: OutlineInputBorder(
+        filled: true,
+        fillColor: const Color.fromARGB(255, 24, 24, 32),
+        prefixIcon: prefixIcon != null
+            ? Icon(prefixIcon, color: Colors.white70)
+            : null,
+        suffixIcon: hasSuffixIcon
+            ? IconButton(
+                onPressed: onPressed,
+                icon: Icon(isObscure ? Icons.visibility : Icons.visibility_off),
+              )
+            : null,
+        enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             width: 1,
             color: AppColors.outlineElement,
@@ -50,10 +60,14 @@ class CustomTextfield extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(10),
         ),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
         labelText: label,
         hintText: hint,
-        labelStyle: TextStyle(color: AppColors.outlineElement),
-        hintStyle: TextStyle(color: AppColors.outlineElement),
+        labelStyle: const TextStyle(color: Color.fromARGB(200, 255, 255, 255)),
+        hintStyle: const TextStyle(color: Color.fromARGB(160, 255, 255, 255)),
       ),
     );
   }
