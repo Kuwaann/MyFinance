@@ -135,13 +135,20 @@ class _OddEvenPageState extends State<OddEvenPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color.fromARGB(255, 10, 10, 17),
       appBar: AppBar(
-        title: const Text("Fitur Ganjil/Genap"),
-        backgroundColor: Colors.grey[850],
+        title: const Text(
+          "Fitur Ganjil/Genap", 
+          style: TextStyle(
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+        foregroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 17, 17, 29),
         bottom: TabBar(
           controller: _tabController,
-          indicatorColor: Colors.amber,
+          labelColor: Colors.white,
+          indicatorColor: Colors.white,
           tabs: const [
             Tab(text: "Cek Angka"),
             Tab(text: "Main Game"),
@@ -154,32 +161,53 @@ class _OddEvenPageState extends State<OddEvenPage>
           // --- Tab 1: cek ganjil/genap
           Padding(
             padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                TextField(
-                  controller: _controller,
-                  keyboardType: TextInputType.number,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    labelText: "Masukkan angka",
-                    labelStyle: const TextStyle(color: Colors.white70),
-                    filled: true,
-                    fillColor: Colors.grey[850],
-                  ),
+            child: Container(
+              constraints: BoxConstraints(maxHeight: 100),
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 17, 17, 29),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: Color.fromARGB(255, 37, 37, 58))
                 ),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey[700],
+              child: Column(
+                children: [
+                  TextField(
+                    controller: _controller,
+                    keyboardType: TextInputType.number,
+                    style: const TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        borderSide: BorderSide(color: Color.fromARGB(255, 37, 37, 58)),
+                      ),
+                      labelText: "Masukkan angka",
+                      labelStyle: const TextStyle(color: Colors.white70),
+                      filled: true,
+                      fillColor: Color.fromARGB(255, 9, 9, 22),
+                    ),
                   ),
-                  onPressed: _checkNumber,
-                  child: const Text("Cek", style: TextStyle(color: Colors.white)),
-                ),
-                const SizedBox(height: 20),
-                Text(_result,
-                    style: const TextStyle(fontSize: 24, color: Colors.white)),
-              ],
+                  const SizedBox(height: 20),
+                  
+                  Container(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                      ),
+                      onPressed: _checkNumber,
+                      child: const Text("Cek", style: TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(_result,
+                      style: const TextStyle(fontSize: 24, color: Colors.white)),
+                ],
+              ),
             ),
           ),
 

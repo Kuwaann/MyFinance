@@ -131,7 +131,9 @@ class PageHomepage extends StatelessWidget {
                       ),
                       child: InkWell(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
-                        onTap: (){},
+                        onTap: () {
+                          Navigator.pushNamed(context,'/ganjilgenap');
+                        },
                         child: Padding(
                           padding: EdgeInsets.all(20),
                           child: Row(

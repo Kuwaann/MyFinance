@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myfinance/gg.dart';
 import 'package:myfinance/homepage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,13 +19,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 255, 196, 0)),
         textTheme: GoogleFonts.poppinsTextTheme(),
       ),
       initialRoute: '/',
       routes: {
         '/': (context) => const PageHomepage(),
         '/kalkulator': (context) => const Calculator(),
+        '/ganjilgenap': (context) => const OddEvenPage(),
       },
     );
   }
