@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myfinance/styles.dart';
 
 class TeamPage extends StatelessWidget {
   const TeamPage({super.key});
@@ -72,10 +73,10 @@ class TeamPage extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  "KEMBALI KE MENU",
+                  "Kembali ke Menu",
                   style: TextStyle(
                     color: Colors.black,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w900,
                   ),
                 ),
               ),
@@ -106,7 +107,7 @@ class TeamMember extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 17, 17, 29),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white24, width: 1),
+        border: Border.all(color: AppColors.outlineElement, width: 1),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.3),
