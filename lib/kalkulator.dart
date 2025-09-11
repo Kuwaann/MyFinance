@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myfinance/styles.dart';
 
 class Calculator extends StatefulWidget {
   const Calculator({super.key});
@@ -15,6 +16,19 @@ class _CalculatorState extends State<Calculator> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A11),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          onPressed: (){
+            Navigator.pop(context, '/homepage');
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            size: 25,
+            color: Colors.white,
+            ),
+          ),
+      ),
       body: Column(
         children: [
           // Bagian atas / display input dan hasil
@@ -47,7 +61,7 @@ class _CalculatorState extends State<Calculator> {
             ),
           ),
 
-          const Divider(color: Colors.white, height: 1),
+          const Divider(color: AppColors.outlineElement, height: 1),
 
           // Bagian bawah / tombol untuk input
           Expanded(
@@ -117,24 +131,28 @@ class _CalculatorState extends State<Calculator> {
       flex: flex,
       child: Padding(
         padding: const EdgeInsets.all(6),
-        child: InkWell(
-          onTap: () {
-            setState(() {
-              handleButtons(text);
-            });
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              color: getBgColor(text),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Center(
-              child: Text(
-                text,
-                style: TextStyle(
-                  color: getColor(text),
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
+        child: Ink(
+          decoration: BoxDecoration(
+                color: getBgColor(text),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppColors.outlineElement,),
+          ),
+          child: InkWell(
+            borderRadius: BorderRadius.all(Radius.circular(12)),
+            onTap: () {
+              setState(() {
+                handleButtons(text);
+              });
+            },
+            child: Container(
+              child: Center(
+                child: Text(
+                  text,
+                  style: TextStyle(
+                    color: getColor(text),
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
@@ -146,17 +164,17 @@ class _CalculatorState extends State<Calculator> {
 
   /// Warna background tombol
   Color getBgColor(String text) {
-    if (text == '=') return Colors.white;
+    if (text == '=') return const Color.fromARGB(255, 255, 166, 0);
     if (['0','1','2','3','4','5','6','7','8','9'].contains(text)) {
-      return const Color.fromARGB(255, 63, 63, 63);
+      return AppColors.element;
     }
-    return Colors.grey[850]!;
+    return const Color.fromARGB(255, 33, 33, 46);
   }
 
   /// Warna teks tombol
   Color getColor(String text) {
     if (text == '=') return Colors.black;
-    return Colors.white;
+    return const Color.fromARGB(255, 255, 255, 255);
   }
 
   /// Logika tombol

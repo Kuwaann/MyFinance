@@ -245,7 +245,7 @@ class PageHomepage extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      "Bisa menghitung dosa-dosa Soeharto.",
+                                      "Seperti kalkulator pada umumnya.",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 15,
