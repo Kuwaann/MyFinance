@@ -195,7 +195,9 @@ class PageHomepage extends StatelessWidget {
                       ),
                       child: InkWell(
                         borderRadius: BorderRadius.circular(20),
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context,'/kalkulator');
+                        },
                         child: Padding(
                           padding: EdgeInsets.all(20),
                           child: Row(
