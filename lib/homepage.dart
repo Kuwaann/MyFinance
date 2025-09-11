@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:myfinance/styles.dart';
 
 class PageHomepage extends StatelessWidget {
   const PageHomepage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 10, 10, 17),
+      backgroundColor: AppColors.backGround,
       extendBody: true,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -14,7 +15,7 @@ class PageHomepage extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(color: Color.fromARGB(255, 37, 37, 58)),
+                    bottom: BorderSide(color: AppColors.outlineElement),
                   ),
                   color: Color.fromARGB(255, 17, 17, 29),
                 ),
@@ -33,6 +34,7 @@ class PageHomepage extends StatelessWidget {
                   ],
                 ),
               ),
+
               // Container(
               //   decoration: BoxDecoration(
               //     border: Border(
@@ -49,8 +51,8 @@ class PageHomepage extends StatelessWidget {
               //     ],
               //   ),
               // ),
-        
-              Padding( // Container
+              Padding(
+                // Container
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Container(
                   decoration: BoxDecoration(
@@ -69,7 +71,8 @@ class PageHomepage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center, // ubah ke start
+                    crossAxisAlignment:
+                        CrossAxisAlignment.center, // ubah ke start
                     children: [
                       Text(
                         "Halo!",
@@ -88,16 +91,18 @@ class PageHomepage extends StatelessWidget {
                           fontWeight: FontWeight.w100,
                         ),
                       ),
-                      SizedBox(height:15),
+                      SizedBox(height: 15),
                       Container(
                         width: double.infinity,
                         height: 45,
                         child: ElevatedButton(
-                          onPressed: (){},
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color.fromARGB(255, 255, 255, 255),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20), // rounded
+                              borderRadius: BorderRadius.circular(
+                                20,
+                              ), // rounded
                             ),
                           ),
                           child: Text(
@@ -110,13 +115,13 @@ class PageHomepage extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ]
-                  )
+                    ],
+                  ),
                 ),
               ),
-        
+
               SizedBox(height: 30),
-        
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ConstrainedBox(
@@ -125,14 +130,16 @@ class PageHomepage extends StatelessWidget {
                     color: Colors.transparent,
                     child: Ink(
                       decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 17, 17, 29),
-                            border: Border.all(color:Color.fromARGB(255, 37, 37, 58)),
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                        color: AppColors.backgroundLayout,
+                        border: Border.all(
+                          color: Color.fromARGB(255, 37, 37, 58),
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
                       child: InkWell(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         onTap: () {
-                          Navigator.pushNamed(context,'/ganjilgenap');
+                          Navigator.pushNamed(context, '/ganjilgenap');
                         },
                         child: Padding(
                           padding: EdgeInsets.all(20),
@@ -144,8 +151,12 @@ class PageHomepage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Icon( Icons.onetwothree, color: Colors.white, size: 50), // Icon
-                                ]
+                                  Icon(
+                                    Icons.onetwothree,
+                                    color: Colors.white,
+                                    size: 50,
+                                  ), // Icon
+                                ],
                               ),
                               SizedBox(width: 20),
                               Expanded(
@@ -154,18 +165,19 @@ class PageHomepage extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Ganjil atau Genap?", 
+                                      "Ganjil atau Genap?",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
-                                        fontWeight: FontWeight.w700
-                                      )),
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
                                     Text(
-                                      "Ini adalah fitur untuk mengetahui apakah suatu bilangan itu ganjil atau genap.", 
+                                      "Ini adalah fitur untuk mengetahui apakah suatu bilangan itu ganjil atau genap.",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 15,
-                                        fontWeight: FontWeight.w100
+                                        fontWeight: FontWeight.w100,
                                       ),
                                       textAlign: TextAlign.justify,
                                     ),
@@ -180,9 +192,9 @@ class PageHomepage extends StatelessWidget {
                   ),
                 ),
               ),
-        
+
               SizedBox(height: 10),
-              
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: ConstrainedBox(
@@ -191,14 +203,21 @@ class PageHomepage extends StatelessWidget {
                     color: Colors.transparent, // biar ripple bisa muncul
                     child: Ink(
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 17, 17, 29), // background kotak
+                        color: Color.fromARGB(
+                          255,
+                          17,
+                          17,
+                          29,
+                        ), // background kotak
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: Color.fromARGB(255, 37, 37, 58)), // border kotak
+                        border: Border.all(
+                          color: Color.fromARGB(255, 37, 37, 58),
+                        ), // border kotak
                       ),
                       child: InkWell(
                         borderRadius: BorderRadius.circular(20),
                         onTap: () {
-                          Navigator.pushNamed(context,'/kalkulator');
+                          Navigator.pushNamed(context, '/kalkulator');
                         },
                         child: Padding(
                           padding: EdgeInsets.all(20),
@@ -206,7 +225,11 @@ class PageHomepage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Icon(Icons.calculate, color: Colors.white, size: 50),
+                              Icon(
+                                Icons.calculate,
+                                color: Colors.white,
+                                size: 50,
+                              ),
                               SizedBox(width: 20),
                               Expanded(
                                 child: Column(
@@ -216,16 +239,18 @@ class PageHomepage extends StatelessWidget {
                                     Text(
                                       "Kalkulator",
                                       style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w700),
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     ),
                                     Text(
-                                      "Ya, seperti biasa kalkulator pada umumnya.",
+                                      "Bisa menghitung dosa-dosa Soeharto.",
                                       style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w100),
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w100,
+                                      ),
                                       textAlign: TextAlign.justify,
                                     ),
                                   ],
@@ -239,14 +264,17 @@ class PageHomepage extends StatelessWidget {
                   ),
                 ),
               ),
-
             ],
           ),
         ),
       ),
 
-      bottomNavigationBar: Padding( // Navbar
-        padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20), // biar ada jarak dari tepi
+      bottomNavigationBar: Padding(
+        // Navbar
+        padding: const EdgeInsets.symmetric(
+          horizontal: 60,
+          vertical: 20,
+        ), // biar ada jarak dari tepi
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           decoration: BoxDecoration(
@@ -265,12 +293,27 @@ class PageHomepage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
-                icon: Icon(Icons.home, color: const Color.fromARGB(255, 255, 255, 255)),
-                onPressed: (){},
+                icon: Icon(
+                  Icons.home,
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                ),
+                onPressed: () {},
               ),
               IconButton(
-                icon: Icon(Icons.person, color: const Color.fromARGB(255, 255, 255, 255)),
-                onPressed: (){},
+                icon: Icon(
+                  Icons.person,
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                ),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.logout,
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
               ),
             ],
           ),

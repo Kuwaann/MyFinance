@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myfinance/gg.dart';
 import 'package:myfinance/homepage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myfinance/login.dart';
 import 'kalkulator.dart';
 
 void main() {
@@ -17,9 +18,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme()),
-      initialRoute: '/',
+      initialRoute: '/login',
       routes: {
-        '/': (context) => const PageHomepage(),
+        '/login': (context) => const Login(),
+        '/homepage': (context) => const PageHomepage(),
         '/kalkulator': (context) => const Calculator(),
         '/ganjilgenap': (context) => const OddEvenPage(),
       },
