@@ -19,15 +19,15 @@ class _CalculatorState extends State<Calculator> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          onPressed: (){
+          onPressed: () {
             Navigator.pop(context, '/homepage');
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios_new_rounded,
             size: 25,
             color: Colors.white,
-            ),
           ),
+        ),
       ),
       body: Column(
         children: [
@@ -37,23 +37,34 @@ class _CalculatorState extends State<Calculator> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                // Input (scroll horizontal kalau panjang)
                 Container(
                   padding: const EdgeInsets.all(20),
                   alignment: Alignment.centerRight,
-                  child: Text(
-                    userInput,
-                    style: const TextStyle(fontSize: 32, color: Colors.white),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    reverse: true,
+                    child: Text(
+                      userInput,
+                      style: const TextStyle(fontSize: 32, color: Colors.white),
+                    ),
                   ),
                 ),
+
+                // Hasil (auto resize biar nggak overflow)
                 Container(
                   padding: const EdgeInsets.all(10),
                   alignment: Alignment.centerRight,
-                  child: Text(
-                    result,
-                    style: const TextStyle(
-                      fontSize: 48,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      result,
+                      style: const TextStyle(
+                        fontSize: 48,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -151,26 +162,24 @@ class _CalculatorState extends State<Calculator> {
         padding: const EdgeInsets.all(6),
         child: Ink(
           decoration: BoxDecoration(
-                color: getBgColor(text),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: AppColors.outlineElement,),
+            color: getBgColor(text),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: AppColors.outlineElement),
           ),
           child: InkWell(
-            borderRadius: BorderRadius.all(Radius.circular(12)),
+            borderRadius: const BorderRadius.all(Radius.circular(12)),
             onTap: () {
               setState(() {
                 handleButtons(text);
               });
             },
-            child: Container(
-              child: Center(
-                child: Text(
-                  text,
-                  style: TextStyle(
-                    color: getColor(text),
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                  ),
+            child: Center(
+              child: Text(
+                text,
+                style: TextStyle(
+                  color: getColor(text),
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -224,7 +233,13 @@ class _CalculatorState extends State<Calculator> {
 
       List<String> tokens = tokenize(input);
       double eval = evaluate(tokens);
-      return eval.toString();
+
+      // Format hasil agar rapi (max 6 desimal, buang trailing zero)
+      String formatted = eval.toStringAsFixed(6)
+          .replaceFirst(RegExp(r'0+$'), '')
+          .replaceFirst(RegExp(r'\.$'), '');
+
+      return formatted;
     } catch (e) {
       return "Error";
     }
@@ -249,7 +264,10 @@ class _CalculatorState extends State<Calculator> {
       }
     }
 
-    if (number.isNotEmpty) tokens.add(number);
+    if (number.isNotEmpty) {
+      tokens.add(number);
+    }
+
     return tokens;
   }
 
@@ -260,7 +278,13 @@ class _CalculatorState extends State<Calculator> {
       if (tokens[i] == "*" || tokens[i] == "/") {
         double left = double.parse(tokens[i - 1]);
         double right = double.parse(tokens[i + 1]);
-        double res = tokens[i] == "*" ? left * right : left / right;
+
+        double res;
+        if (tokens[i] == "*") {
+          res = left * right;
+        } else {
+          res = left / right;
+        }
 
         tokens.replaceRange(i - 1, i + 2, [res.toString()]);
         i -= 1;
@@ -273,8 +297,11 @@ class _CalculatorState extends State<Calculator> {
       String op = tokens[i];
       double num = double.parse(tokens[i + 1]);
 
-      if (op == "+") result += num;
-      if (op == "-") result -= num;
+      if (op == "+") {
+        result += num;
+      } else if (op == "-") {
+        result -= num;
+      }
     }
 
     return result;
