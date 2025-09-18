@@ -49,7 +49,7 @@ class _LoginState extends State<Login> {
             child: ConstrainedBox(
               constraints: const BoxConstraints(),
               child: Card(
-                color: const Color.fromARGB(255, 17, 17, 29),
+                color: AppColors.backgroundLayout,
                 elevation: 10,
                 shadowColor: Colors.black12,
                 shape: RoundedRectangleBorder(
@@ -77,7 +77,7 @@ class _LoginState extends State<Login> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        'Login Details 😉',
+                        'Welcome Back😉',
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Color.fromRGBO(255, 255, 255, 1),
@@ -129,13 +129,27 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      SizedBox(
-                        height: 48,
+                      Container(
+                        height: 46,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          gradient: const LinearGradient(
+                            colors: [Colors.purpleAccent, Colors.blueAccent],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.purple.withOpacity(0.5),
+                              blurRadius: 15,
+                              offset: const Offset(0, 8),
+                            ),
+                          ],
+                        ),
                         child: ElevatedButton(
                           onPressed: () {
                             final email = emailController.text.trim();
                             final password = passwordController.text;
-
                             const validEmail = 'tugasPAM@upnyk.ac.id';
                             const validPassword = '1';
                             if (email == validEmail &&
@@ -146,26 +160,34 @@ class _LoginState extends State<Login> {
                               );
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Email atau password salah'),
+                                SnackBar(
+                                  content: const Text(
+                                    'Email atau password salah',
+                                  ),
                                   behavior: SnackBarBehavior.floating,
+                                  backgroundColor: Colors.red.withOpacity(0.9),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
                                 ),
                               );
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.button,
+                            backgroundColor: Colors.transparent,
+                            shadowColor: Colors.transparent,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(16),
                             ),
                             elevation: 0,
-                            foregroundColor: Colors.black,
                           ),
                           child: const Text(
-                            'Login',
+                            'Sign In',
                             style: TextStyle(
-                              fontSize: 17.0,
-                              fontWeight: FontWeight.w700,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                              letterSpacing: 1.5,
                             ),
                           ),
                         ),
@@ -173,15 +195,47 @@ class _LoginState extends State<Login> {
                       const SizedBox(height: 16),
                       Row(
                         children: [
-                          Expanded(child: Divider(color: Colors.grey.shade300)),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text(
-                              'atau',
-                              style: TextStyle(color: Colors.white),
+                          Expanded(
+                            child: Container(
+                              height: 2,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.transparent,
+                                    Colors.white.withOpacity(0.3),
+                                    Colors.transparent,
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                          Expanded(child: Divider(color: Colors.grey.shade300)),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0,
+                            ),
+                            child: Text(
+                              'or',
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.5),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w200,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              height: 2,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.transparent,
+                                    Colors.white.withOpacity(0.3),
+                                    Colors.transparent,
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 12),
@@ -193,13 +247,52 @@ class _LoginState extends State<Login> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      const SizedBox(height: 6),
-                      Text(
-                        'Sign up',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
+                      const SizedBox(height: 24),
+                      // Sign Up Section
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Don\'t have an account? ',
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.8),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                // Add sign up navigation logic here
+                              },
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                                minimumSize: Size.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              child: ShaderMask(
+                                shaderCallback: (bounds) =>
+                                    const LinearGradient(
+                                      colors: [
+                                        Colors.purpleAccent,
+                                        Colors.blueAccent,
+                                      ],
+                                    ).createShader(bounds),
+                                child: const Text(
+                                  'Sign Up',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: Colors.purpleAccent,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     ],
                   ),
