@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  math_expressions: ^2.4.0
   typewritertext: ^3.0.9
   flutter:
     sdk: flutter

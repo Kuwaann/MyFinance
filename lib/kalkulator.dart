@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myfinance/styles.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class Calculator extends StatefulWidget {
   const Calculator({super.key});
@@ -139,10 +140,7 @@ class _CalculatorState extends State<Calculator> {
                       buildButton("+"),
                       buildButton("-"),
                       buildButton("⌫"),
-                      Expanded(
-                        flex: 2,
-                        child: buildButton("="),
-                      ),
+                      Expanded(flex: 2, child: buildButton("=")),
                     ],
                   ),
                 ),
@@ -192,7 +190,7 @@ class _CalculatorState extends State<Calculator> {
   /// Warna background tombol
   Color getBgColor(String text) {
     if (text == '=') return const Color.fromARGB(255, 255, 166, 0);
-    if (['0','1','2','3','4','5','6','7','8','9'].contains(text)) {
+    if (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].contains(text)) {
       return AppColors.element;
     }
     return const Color.fromARGB(255, 33, 33, 46);
@@ -225,85 +223,30 @@ class _CalculatorState extends State<Calculator> {
     userInput += text;
   }
 
-  /// Fungsi operasi hitung untuk kalkulator
+  /// Hitung ekspresi dengan math_expressions
   String calculate() {
     try {
       String input = userInput;
       input = input.replaceAll("×", "*").replaceAll("÷", "/");
 
-      List<String> tokens = tokenize(input);
-      double eval = evaluate(tokens);
+      Parser p = Parser();
+      Expression exp = p.parse(input);
+      ContextModel cm = ContextModel();
 
-      // Format hasil agar rapi (max 6 desimal, buang trailing zero)
-      String formatted = eval.toStringAsFixed(6)
-          .replaceFirst(RegExp(r'0+$'), '')
-          .replaceFirst(RegExp(r'\.$'), '');
+      double eval = exp.evaluate(EvaluationType.REAL, cm);
 
-      return formatted;
+      // Kalau hasilnya bilangan bulat, tampilkan tanpa koma
+      if (eval == eval.roundToDouble()) {
+        return eval.toStringAsFixed(0); // integer tanpa koma
+      } else {
+        // kalau desimal, batasi misalnya max 6 digit di belakang koma
+        return eval
+            .toStringAsFixed(6)
+            .replaceFirst(RegExp(r'0+$'), '')
+            .replaceFirst(RegExp(r'\.$'), '');
+      }
     } catch (e) {
       return "Error";
     }
-  }
-
-  /// Pisahkan angka dan operator
-  List<String> tokenize(String input) {
-    List<String> tokens = [];
-    String number = "";
-
-    for (int i = 0; i < input.length; i++) {
-      String ch = input[i];
-
-      if ("0123456789.".contains(ch)) {
-        number += ch;
-      } else {
-        if (number.isNotEmpty) {
-          tokens.add(number);
-          number = "";
-        }
-        tokens.add(ch);
-      }
-    }
-
-    if (number.isNotEmpty) {
-      tokens.add(number);
-    }
-
-    return tokens;
-  }
-
-  /// Evaluasi dengan prioritas operator
-  double evaluate(List<String> tokens) {
-    // tahap 1: untuk × dan ÷
-    for (int i = 0; i < tokens.length; i++) {
-      if (tokens[i] == "*" || tokens[i] == "/") {
-        double left = double.parse(tokens[i - 1]);
-        double right = double.parse(tokens[i + 1]);
-
-        double res;
-        if (tokens[i] == "*") {
-          res = left * right;
-        } else {
-          res = left / right;
-        }
-
-        tokens.replaceRange(i - 1, i + 2, [res.toString()]);
-        i -= 1;
-      }
-    }
-
-    // tahap 2: untuk + dan -
-    double result = double.parse(tokens[0]);
-    for (int i = 1; i < tokens.length; i += 2) {
-      String op = tokens[i];
-      double num = double.parse(tokens[i + 1]);
-
-      if (op == "+") {
-        result += num;
-      } else if (op == "-") {
-        result -= num;
-      }
-    }
-
-    return result;
   }
 }
