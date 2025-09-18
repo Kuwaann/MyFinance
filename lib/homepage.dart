@@ -8,7 +8,7 @@ class PageHomepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backGround,
-      extendBody: false,
+      extendBody: true,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -54,10 +54,10 @@ class PageHomepage extends StatelessWidget {
               // ),
               Padding(
                 // Container
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 111, 0, 255),
+                    color: Color.fromARGB(255, 17, 17, 29),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.3),
@@ -65,21 +65,15 @@ class PageHomepage extends StatelessWidget {
                         offset: Offset(0, 5),
                       ),
                     ],
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors:[
-                        Color.fromARGB(255, 165, 96, 255),
-                        Color.fromARGB(255, 194, 148, 255),
-                      ]
-                    ),
-                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(color: Color.fromARGB(255, 37, 37, 58)),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start, // ubah ke start
+                    crossAxisAlignment:
+                        CrossAxisAlignment.center, // ubah ke start
                     children: [
                       // TypeWriter.text(
                       //   'lorem ipsum dolot sit amet ...',
@@ -88,7 +82,7 @@ class PageHomepage extends StatelessWidget {
                       Text(
                         "Halo!",
                         style: TextStyle(
-                          color: const Color.fromARGB(255, 0, 0, 0),
+                          color: Colors.white,
                           fontSize: 40,
                           fontWeight: FontWeight.w600,
                         ),
@@ -96,17 +90,32 @@ class PageHomepage extends StatelessWidget {
                       ),
                       TypeWriter.text(
                         "Klik tombol di bawah ini untuk melihat halaman pembuat.",
-                        textAlign: TextAlign.left,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: const Color.fromARGB(255, 0, 0, 0),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w100,
                         ),
-                        duration: const Duration(milliseconds: 50),
-                        repeat: false,
+                        duration: const Duration(milliseconds: 90),
+                        repeat: true,
                       ),
-                      SizedBox(height: 18),
+                      SizedBox(height: 15),
                       Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          gradient: const LinearGradient(
+                            colors: [Colors.purpleAccent, Colors.blueAccent],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.purple.withOpacity(0.5),
+                              blurRadius: 15,
+                              offset: const Offset(0, 8),
+                            ),
+                          ],
+                        ),
                         width: double.infinity,
                         height: 45,
                         child: ElevatedButton(
@@ -114,8 +123,7 @@ class PageHomepage extends StatelessWidget {
                             Navigator.pushNamed(context, '/team');
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 255, 255, 255),
-                            elevation: 0,
+                            // backgroundColor: Color.fromARGB(255, 255, 255, 255),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                 20,

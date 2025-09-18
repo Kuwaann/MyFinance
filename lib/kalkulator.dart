@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myfinance/styles.dart';
-import 'package:intl/intl.dart';
 
 class Calculator extends StatefulWidget {
   const Calculator({super.key});
@@ -113,7 +112,7 @@ class _CalculatorState extends State<Calculator> {
                         child: Row(
                           children: [
                             buildButton("0", flex: 2),
-                            buildButton(","),
+                            buildButton("."),
                           ],
                         ),
                       ),
@@ -239,7 +238,7 @@ class _CalculatorState extends State<Calculator> {
     for (int i = 0; i < input.length; i++) {
       String ch = input[i];
 
-      if ("0123456789,".contains(ch)) {
+      if ("0123456789.".contains(ch)) {
         number += ch;
       } else {
         if (number.isNotEmpty) {
