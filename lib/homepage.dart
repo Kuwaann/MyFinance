@@ -8,7 +8,7 @@ class PageHomepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backGround,
-      extendBody: true,
+      extendBody: false,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -54,10 +54,10 @@ class PageHomepage extends StatelessWidget {
               // ),
               Padding(
                 // Container
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 17, 17, 29),
+                    color: Color.fromARGB(255, 111, 0, 255),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.3),
@@ -65,15 +65,21 @@ class PageHomepage extends StatelessWidget {
                         offset: Offset(0, 5),
                       ),
                     ],
-                    border: Border.all(color: Color.fromARGB(255, 37, 37, 58)),
-                    borderRadius: BorderRadius.circular(20),
+                    gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors:[
+                        Color.fromARGB(255, 165, 96, 255),
+                        Color.fromARGB(255, 194, 148, 255),
+                      ]
+                    ),
+                    borderRadius: BorderRadius.circular(30),
                   ),
                   margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment:
-                        CrossAxisAlignment.center, // ubah ke start
+                    crossAxisAlignment: CrossAxisAlignment.start, // ubah ke start
                     children: [
                       // TypeWriter.text(
                       //   'lorem ipsum dolot sit amet ...',
@@ -82,7 +88,7 @@ class PageHomepage extends StatelessWidget {
                       Text(
                         "Halo!",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: const Color.fromARGB(255, 0, 0, 0),
                           fontSize: 40,
                           fontWeight: FontWeight.w600,
                         ),
@@ -90,16 +96,16 @@ class PageHomepage extends StatelessWidget {
                       ),
                       TypeWriter.text(
                         "Klik tombol di bawah ini untuk melihat halaman pembuat.",
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.left,
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w100,
+                          color: const Color.fromARGB(255, 0, 0, 0),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
                         ),
-                        duration: const Duration(milliseconds: 90),
-                        repeat: true,
+                        duration: const Duration(milliseconds: 50),
+                        repeat: false,
                       ),
-                      SizedBox(height: 15),
+                      SizedBox(height: 18),
                       Container(
                         width: double.infinity,
                         height: 45,
@@ -109,6 +115,7 @@ class PageHomepage extends StatelessWidget {
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color.fromARGB(255, 255, 255, 255),
+                            elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                 20,
