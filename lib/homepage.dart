@@ -101,6 +101,21 @@ class PageHomepage extends StatelessWidget {
                       ),
                       SizedBox(height: 15),
                       Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          gradient: const LinearGradient(
+                            colors: [Colors.purpleAccent, Colors.blueAccent],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.purple.withOpacity(0.5),
+                              blurRadius: 15,
+                              offset: const Offset(0, 8),
+                            ),
+                          ],
+                        ),
                         width: double.infinity,
                         height: 45,
                         child: ElevatedButton(
@@ -108,7 +123,7 @@ class PageHomepage extends StatelessWidget {
                             Navigator.pushNamed(context, '/team');
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 255, 255, 255),
+                            // backgroundColor: Color.fromARGB(255, 255, 255, 255),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(
                                 20,
