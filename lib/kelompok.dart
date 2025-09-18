@@ -32,35 +32,24 @@ class TeamPage extends StatelessWidget {
                     name: "Acchmad Nur Choiron",
                     nim: "124230126",
                     imagePath: "assets/images/roblox.jpeg",
-                    citacita: "Pengoding Handal",
                   ),
                   SizedBox(height: 16),
                   TeamMember(
                     name: "Muhammad Sulthan Al Azzam",
                     nim: "124230127",
                     imagePath: "assets/images/roblox.jpeg",
-                    citacita: "Komisaris",
                   ),
                   SizedBox(height: 16),
                   TeamMember(
                     name: "Muhammad Emir Rivaldy",
                     nim: "124230135",
                     imagePath: "assets/images/roblox.jpeg",
-                    citacita: "Enggineer",
                   ),
                   SizedBox(height: 16),
                   TeamMember(
                     name: "Ridho Nur Maulana",
                     nim: "124230142",
                     imagePath: "assets/images/roblox.jpeg",
-                    citacita: "Prabowo",
-                  ),
-                  SizedBox(height: 16),
-                  TeamMember(
-                    name: "Tineke Artha Hapsarih",
-                    nim: "124230129",
-                    imagePath: "assets/images/roblox.jpeg",
-                    citacita: "Desainer",
                   ),
                 ],
               ),
@@ -102,14 +91,12 @@ class TeamPage extends StatelessWidget {
 class TeamMember extends StatelessWidget {
   final String name;
   final String nim;
-  final String citacita;
   final String imagePath;
 
   const TeamMember({
     super.key,
     required this.name,
     required this.nim,
-    required this.citacita,
     required this.imagePath,
   });
 
@@ -148,10 +135,6 @@ class TeamMember extends StatelessWidget {
                 ),
                 Text(
                   "($nim)",
-                  style: const TextStyle(color: Colors.white70, fontSize: 14),
-                ),
-                Text(
-                  "$citacita",
                   style: const TextStyle(color: Colors.white70, fontSize: 14),
                 ),
               ],

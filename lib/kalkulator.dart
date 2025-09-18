@@ -213,7 +213,7 @@ class _CalculatorState extends State<Calculator> {
         userInput += "0"; // ".5" → "0.5"
       }
     }
-
+  
     userInput += text;
   }
 
